@@ -1,13 +1,37 @@
-import { StyleSheet, Text, View, SafeAreaView, Image , TouchableOpacity} from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacity } from 'react-native'
 import React, { useEffect } from 'react'
 import { Audio } from 'expo-av';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Button } from "@react-native-material/core";
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 export default function ItemScreen({ route, navigation: { goBack } }) {
 
-  const item = route.params.item
+  var item = route.params.item
+  var file = route.params.file
   const [sound, setSound] = React.useState();
 
+  async function playSound() {
+    console.log('Loading Sound');
+
+    try {
+      const { sound } = await Audio.Sound.createAsync(require(`../assets/voices/1.mp3`));
+      setSound(sound);
+      console.log('Playing Sound');
+      await sound.playAsync();
+    } catch (error) {
+      alert(error.message)
+    }
+  }
+
+  React.useEffect(() => {
+    return sound
+      ? () => {
+        console.log('Unloading Sound');
+        sound.unloadAsync();
+      }
+      : undefined;
+  }, [sound]);
 
   return (
     <View style={styles.eventview}>
@@ -17,10 +41,15 @@ export default function ItemScreen({ route, navigation: { goBack } }) {
         <View style={{ flex: 2, backgroundColor: '#343434', borderRadius: 25, marginTop: 20, marginBottom: 25 }}>
           <ScrollView>
             <Text style={styles.eventDetail}>{item.content}</Text>
+            {/* <Text style={styles.eventDetail}>{item.file}</Text> */}
           </ScrollView>
+
+          <TouchableOpacity style={styles.logButton} onPress={() => playSound()}>
+            <Text style={styles.logoutText}> ฟังเสียง</Text>
+          </TouchableOpacity>
         </View>
         <View style={{ flex: 1, marginTop: 50 }}>
-          <TouchableOpacity style={styles.logoutButton} onPress={()=>goBack()}>
+          <TouchableOpacity style={styles.logoutButton} onPress={() => goBack()}>
             <Text style={styles.logoutText}>เรื่องตลก</Text>
           </TouchableOpacity>
         </View>
@@ -106,5 +135,14 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     textAlign: 'center',
     padding: 7
+  }, logButton: {
+    backgroundColor: '#000',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginTop: 30,
+    width: 150,
+    height: 50,
+    marginStart: 115,
   },
 });

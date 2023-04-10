@@ -4,7 +4,6 @@ import {
     Text,
     View,
     TextInput,
-    Button,
     StyleSheet,
     TouchableOpacity,
     Platform,
@@ -12,6 +11,7 @@ import {
 import { FirebaseRecaptchaVerifierModal, FirebaseRecaptchaBanner } from 'expo-firebase-recaptcha';
 import { initializeApp, getApp } from 'firebase/app';
 import { getAuth, PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
+import { Button } from "@react-native-material/core";
 
 export default function LoginScreen({ navigation }) {
 
@@ -63,7 +63,7 @@ export default function LoginScreen({ navigation }) {
                 ref={recaptchaVerifier}
                 firebaseConfig={app.options}
             />
-            <Text style={{ marginTop: 100, fontSize: 18, marginBottom: 5 }}>Login</Text>
+            <Text style={{ marginTop: 100, fontSize: 18, marginBottom: 5 }}>เบอร์โทร</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Tel +66"
@@ -73,29 +73,30 @@ export default function LoginScreen({ navigation }) {
                 textContentType="telephoneNumber"
                 onChangeText={phoneNumber => setPhoneNumber(phoneNumber)}
             />
-            <TouchableOpacity style={styles.button} disabled={!phoneNumber}>
+            {/* <TouchableOpacity style={styles.button} disabled={!phoneNumber}>
                 <Text style={styles.buttonText} onPress={() => onSendVerifyCode()}>Send verification code</Text>
-            </TouchableOpacity>
-            {/* <Button
-                title="Send Verification Code"
+            </TouchableOpacity> */}
+            <Button
+                title="ส่ง"
                 disabled={!phoneNumber}
                 onPress={() => onSendVerifyCode()}
-            /> */}
-            <Text style={{ marginTop: 20, fontSize: 18, marginBottom: 5 }}>ยืนยันรหัส</Text>
+                
+            />
+            <Text style={{ marginTop: 20, fontSize: 18, marginBottom: 5 }}>ใส่รหัส</Text>
             <TextInput
                 style={styles.input}
                 editable={!!verificationId}
-                placeholder="123456"
+                placeholder="000123"
                 onChangeText={setVerificationCode}
             />
-            <TouchableOpacity style={styles.button} disabled={!phoneNumber}>
+            {/* <TouchableOpacity style={styles.button} disabled={!phoneNumber}>
                 <Text style={styles.buttonText} onPress={() => onConfirmVerifyCode()}>Confirm Verification Code</Text>
-            </TouchableOpacity>
-            {/* <Button
-                title="Confirm Verification Code"
+            </TouchableOpacity> */}
+            <Button
+                title="ยืนยัน"
                 disabled={!verificationId}
                 onPress={() => onConfirmVerifyCode()}
-            /> */}
+            />
             {message ? (
                 <TouchableOpacity
                     style={[

@@ -79,7 +79,9 @@ export default function MainScreen({ navigation }) {
             ),
             title: "ข้อมูลผู้ใช้"
           }}
-          initialParams={{ phoneNumber: user.phoneNumber }} />
+          initialParams={{ phoneNumber: user.phoneNumber }}
+          // initialParams={{ phoneNumber: user.phoneNumber }}
+           />
           
       </Tab.Navigator>
   )

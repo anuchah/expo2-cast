@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default function ProfileScreen({ route, navigation }) {
 
     const phoneNumber = route.params.phoneNumber
+    // const phoneNumber = "090909090"
 
     const signOutHandle = () => {
         try {

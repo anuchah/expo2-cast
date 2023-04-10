@@ -27,14 +27,11 @@ export default function JokeScreens({ route, navigation }) {
 
 function Box({ item, navigation }) {
     var item = item;
-
-
     const handleSend = () => {
-        navigation("Item", params = { item: item })
+        navigation("Item", params = { item: item, file: item.file })
     }
 
     return (
-        
             <TouchableOpacity
                 onPress={() => handleSend()}
                 style={styles.eventBox} >
