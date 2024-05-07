@@ -50,7 +50,7 @@ export default function ItemScreen({ route, navigation: { goBack } }) {
         </View>
         <View style={{ flex: 1, marginTop: 50 }}>
           <TouchableOpacity style={styles.logoutButton} onPress={() => goBack()}>
-            <Text style={styles.logoutText}>เรื่องตลก</Text>
+            <Text style={styles.logoutText}>ตลกละ</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
